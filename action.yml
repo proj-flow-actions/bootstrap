@@ -30,7 +30,7 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v5
-      if: ${{ inputs.checkout }}
+      if: ${{ fromJson(inputs.checkout) }}
       with:
         submodules: ${{ inputs.submodules }}
 
@@ -41,7 +41,6 @@ runs:
 
     - name: Virtual env cache
       uses: actions/cache@v5
-      id: cache
       with:
         path: .venv
         key: ${{ inputs.cache-prefix }}-${{ hashFiles('.flow/flow.py') }}
